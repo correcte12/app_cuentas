@@ -1,0 +1,268 @@
+# Aplicación móvil para controlar las cuentas
+
+Lleva un control total de tus cuentas en el día a día.
+
+## Instalar Node.js
+[Descargar Node.js LTS](https://nodejs.org/es/)
+
+## Instalar yarn
+[Descargar Yarn](https://yarnpkg.com/lang/en/docs/install)
+## Instalar quasar-cli
+https://quasar.dev/quasar-cli/installation
+```
+$ npm install -g @quasar/cli
+```
+
+## Instalar Cordova y Android Studio
+> Apache Cordova es un popular entorno de desarrollo de aplicaciones móviles, originalmente creado por Nitobi. Adobe compró Nitobi en 2011, le cambió el nombre a PhoneGap, y más tarde liberó una versión de código abierto del software llamado Apache Cordova.​
+
+https://quasar.dev/quasar-cli/developing-cordova-apps/preparation
+```
+npm install -g cordova
+```
+> Android Studio es el entorno de desarrollo integrado oficial para la plataforma Android. Fue anunciado el 16 de mayo de 2013 en la conferencia Google I/O, y reemplazó a Eclipse como el IDE oficial para el desarrollo de aplicaciones para Android. La primera versión estable fue publicada en diciembre de 2014.
+
+[Descargar Android Studio](https://developer.android.com/studio)
+
+[Configurar Android Studio](https://developer.android.com/studio/install.html)
+
+Instalar los SDK desde Android Studio junto con las herramientas de desarrollo.
+
+## Instalar Java JDK 8
+> La plataforma Java es el nombre de un entorno o plataforma de computación originaria de Sun Microsystems, capaz de ejecutar aplicaciones desarrolladas usando el lenguaje de programación Java u otros lenguajes que compilen a bytecode y un conjunto de herramientas de desarrollo
+
+[Página descarga Java](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
+Es necesario tener instalado [VirtualBox](https://www.virtualbox.org/) para crear los emuladores más adelante.
+
+## Gradle
+> Gradle es un sistema de automatización de construcción de código abierto que construye sobre los conceptos 
+de Apache Ant y Apache Maven e introduce un lenguaje especifico del dominio basado en Groovy en vez de la 
+forma XML utilizada por Apache Maven para declarar la configuración de proyecto.
+
+Si necesitas instalar Gradle en MAC ejecuta el siguiente comando:
+```
+brew install gradle
+```
+Si necesitas instalar Gradle en Windows sigue este [tutorial](https://www.bryanlor.com/blog/gradle-tutorial-how-install-gradle-windows).
+
+[Más información de Gradle](https://gradle.org/install/)
+
+## Configurar variables entorno MAC
+Editar bash_profile:
+```
+nano ~/.bash_profile
+```
+
+```
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export ANDROID_HOME=/Users/israel/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+```
+
+## Configurar variables entorno Windows
+```
+setx ANDROID_HOME "%USERPROFILE%\AppData\Local\Android\Sdk"
+setx path "%path%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools"
+```
+
+## Crear proyecto
+```
+quasar create gestion-cuentas
+```
+
+## Añadir cordova a nuestro proyecto
+```
+quasar mode add cordova
+```
+
+## Añadir plataforma Android a nuestra APP
+```
+cd src-cordova
+cordova platform add android
+```
+
+## Comprobar requisitos APP
+```
+cd src-cordova
+cordova requirements
+```
+
+## Instalar y configurar Genymotion
+> Genymotion es un emulador para aplicaciones Android multi plataforma
+que nos permite ejecutar APPs de forma rápida.
+
+[Descargar Genymotion For Fun](https://www.genymotion.com/fun-zone)
+
+Configurar el path del SDK e instalar emuladores.
+
+Abrir un emulador.
+
+## El archivo src-cordova/config.xml
+Este archivo es el que nos permite configurar muchas cosas de nuestra APP, nombre, descripción, versión, 
+información de plugins etc.
+
+## El archivo quasar.conf.js
+Aquí podemos realizar toda la configuración de nuestro proyecto, plugins, css, boot, idioma, fuentes.
+
+## Instalar dependencias package.json
+> Vuex Persisted State es útil para guardar los datos de nuestra aplicación (por defecto en localstorage) de forma persistente.
+
+[Vuex Persisted State](https://github.com/robinvdvleuten/vuex-persistedstate)
+
+> Vue ApexCharts nos permite generar gráficas de forma rápida y sencilla.
+
+[Vue ApexCharts](https://apexcharts.com/docs/vue-charts)
+```
+npm install --save apexcharts moment moment-range vue-apexcharts vuex-persistedstate
+```
+
+## Herramientas desarrollo ayuda (Extensiones)
+[Quasar ide-helper](https://github.com/panstromek/quasar-ide-helper)
+> quasar ide helper nos ayuda a añadir autocompletado en este caso al IDE WebStorm.
+```
+quasar ext add ide-helper
+```
+[Quasar dotenv](https://github.com/quasarframework/app-extension-dotenv)
+> dotenv nos permite generar variables de entorno a través de archivos .env, útil para configurar datos por distintos entornos.
+```
+quasar ext add @quasar/dotenv
+```
+
+## Generar icono y splash screen
+[Documentación Icon y SplashScreen Quasar](https://quasar.dev/quasar-cli/app-icons)
+
+Para cambiar el icono y el splash reemplazar el archivo app-icon.png y app-splashscreen.png.
+```
+quasar ext add @quasar/icon-genie
+cd src-cordova
+cordova plugin add cordova-plugin-splashscreen
+cordova plugin save
+cd ..
+```
+Al lanzar el proyecto los iconos serán generados correctamente.
+
+## Lanzar aplicación en Genymotion
+```
+quasar dev -m cordova -T android
+```
+Los iconos del directorio src-cordova/res && config.xml serán generados automáticamente.
+
+## Configurar Store Vuex
+Configurar store/index.js para utilizar Vuex Persisted State.
+
+## Crear módulo Auth Vuex
+```
+quasar new store auth
+```
+
+## Modificar AppLayout
+Navegación tabs y sidemenu si el usuario está identificado.
+
+## Crear Boot checkAuth y vueApexCharts
+> checkAuth: Nos permitirá controlar el acceso únicamente para usuarios identificados
+
+> vueApexCharts: Aprenderemos a instalar componentes externos en Quasar
+```
+quasar new boot checkAuth
+quasar new boot vueApexCharts
+```
+
+# Login
+## Crear página de Login
+```
+quasar new page LoginPage
+```
+Añadir a rutas.
+
+# Incomes
+## Crear módulo Incomes Vuex
+```
+quasar new store incomes
+```
+
+## Crear mixin localeMixin
+Útil para formatos.
+
+## Crear listado ingresos
+Aquí generamos un completo listado de ingresos con q-table.
+```
+quasar new page Incomes/IncomesPage
+```
+
+## Añadir filtro por fechas al listado de ingresos
+Crear campo q-select para filtrar ingresos.
+
+## Crear componente BaseFinancialForm
+Este componente lo heredamos en expenses e incomes.
+```
+quasar new c BaseFinancialForm
+```
+
+## Crear formulario alta ingresos
+Formulario para dar de alta ingresos.
+```
+quasar new p Incomes/IncomesCreate
+```
+Dar de alta en rutas.
+
+## Crear formulario edición ingresos
+Formulario para editar ingresos.
+```
+quasar new p Incomes/IncomesEdit
+```
+Dar de alta en rutas.
+
+# Expenses
+## Crear módulo Expenses Vuex
+```
+quasar new store expenses
+```
+
+## Crear listado gastos
+Aquí generamos un completo listado de gastos con q-table.
+```
+quasar new page Expenses/ExpensesPage
+```
+
+## Crear formulario alta gastos
+Formulario para dar de alta gastos.
+```
+quasar new p Expenses/ExpensesCreate
+```
+Dar de alta en rutas.
+
+## Crear formulario edición gastos
+Formulario para editar gastos.
+```
+quasar new p Expenses/ExpensesEdit
+```
+Dar de alta en rutas.
+
+# Home
+## Crear módulo Timeline Vuex
+```
+quasar new store timeline
+```
+
+## Modificar página Home
+Trabajo en pages/Index.vue para mostrar el timeline.
+
+# Reports
+## Generar gráficas
+Crear página de reports para generar gráfica de beneficios.
+```
+quasar new p ReportsPage
+```
+Dar de alta en rutas.
+
+## Compilar para Android Producción
+```
+quasar build -m android
+keytool -genkey -v -keystore release-cuentas.keystore -alias cuentas -keyalg RSA -keysize 2048 -validity 20000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release-cuentas.keystore dist/cordova/android/app-release-unsigned.apk cuentas
+~/Library/Android/sdk/build-tools/29.0.0/zipalign -v 4 dist/cordova/android/app-release-unsigned.apk Cuentas.apk
+```
