@@ -1,5 +1,5 @@
 
-export function logOut (state) {
+export function LOGOUT (state) {
     state.password = null;
 
 }

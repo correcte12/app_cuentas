@@ -61,7 +61,7 @@
             <q-item-label>Reportes</q-item-label>
           </q-item-section>
         </q-item>
-                <q-item @click.native="resetData">
+        <q-item @click.native="resetData">
           <q-item-section avatar>
             <q-icon name="settings_backup_restore" />
           </q-item-section>
@@ -69,7 +69,7 @@
             <q-item-label>Restablecer datos</q-item-label>
           </q-item-section>
         </q-item>
-                <q-item @click.native="logout">
+        <q-item @click.native="logout">
           <q-item-section avatar>
             <q-icon name="arrow_right_alt" />
           </q-item-section>
@@ -157,6 +157,14 @@ export default {
     },
 
     logout (){
+      this.$store.commit("auth/LOGOUT");
+      this.$router.replace({ name: "Login" });
+      //this.leftDrawerOpen = false;
+      if( navigator && navigator.app) {
+        navigator['app'].exitApp();
+      }
+
+
     }
   }
 }
