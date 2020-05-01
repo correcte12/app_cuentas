@@ -14,8 +14,16 @@ export function forList (state) {
         return state.filters.date === date;
         })
     }
-    return incomes.sort( compareFn: function(a,b){
+    return incomes.sort( function(a,b){
         return new Date(a.date) - new Date(b.data);
-    }
-    )   
+    });   
 }
+export function find (state) {
+    return function (id) {
+      return state.incomes.filter(i => i.id === id)[0];
+    }
+  }
+  
+  export function groupedByDate (state) {
+    return groupByDate(state.incomes);
+  }

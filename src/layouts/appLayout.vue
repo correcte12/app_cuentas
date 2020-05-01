@@ -110,16 +110,11 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink'
 import  { mapGetters } from "vuex";
 
 export default {
   name: 'appLayout',
 
-
-  components: {
-    EssentialLink
-  },
   mounted(){
     this.version = process.env.VERSION;
     this.appName = process.env.APP_NAME;
