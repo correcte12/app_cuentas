@@ -23,7 +23,12 @@ const routes = [
           path: 'incomes/create', 
           name: "IncomesCreate",
           component: () => import('pages/Incomes/incomesCreate.vue')
-      }
+      },
+      { 
+        path: 'incomes/:id', 
+        name: "IncomesEdit",
+        component: () => import('pages/Incomes/incomesEdit.vue')
+    }
     ]
   }
 ]
