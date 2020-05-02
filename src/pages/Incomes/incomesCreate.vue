@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import incomesForm from "components/Incomes/incomesForm.vue";
+import incomesForm from "components/Incomes/incomesForm"
 export default {
     name: 'incomesCreate',
     components: {incomesForm},

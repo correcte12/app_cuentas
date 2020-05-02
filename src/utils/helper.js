@@ -4,7 +4,7 @@ export function groupByDate (data) {
         const [year, month] = e.date.split("/");
         const date = `${month}/${year}`;
         if ( !dates.includes(date)) {
-            dates.puch(date);
+            dates.push(date);
         }        
     });
     return dates;

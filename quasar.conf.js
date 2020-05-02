@@ -39,7 +39,7 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
-      iconSet: 'material-icons', // Quasar icon set
+      //iconSet: 'material-icons', // Quasar icon set
       lang: 'es', // Quasar language pack
 
       // Possible values for "all":
@@ -52,7 +52,7 @@ module.exports = function (/* ctx */) {
       all: 'auto',
 
       components: [
-          'QIcon'
+         // 'QIcon'
       ],
       directives: [],
 

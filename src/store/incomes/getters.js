@@ -2,11 +2,12 @@ import {groupByDate} from "../../utils/helper";
 
 export function totalIncomes (state) {
     return state.incomes.reduce((a, b) => {
-        return a+b['amount'];
+        return a+b ['amount'];
     }, 0);
 }
 
 export function forList (state) {
+    let incomes = state.incomes;
     if(state.filters.date) {
       incomes = incomes.filter(i => {
         const [year, month] = i.date.split("/");
@@ -15,7 +16,7 @@ export function forList (state) {
         })
     }
     return incomes.sort( function(a,b){
-        return new Date(a.date) - new Date(b.data);
+        return new Date(a.date) - new Date(b.date);
     });   
 }
 export function find (state) {

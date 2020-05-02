@@ -1,20 +1,16 @@
-<template>
-  <div>
-    
 
-  </div>
-</template>
 
 <script>
-import BaseAppFormVue from '../BaseAppForm.vue'
+import BaseAppFormVue from '../BaseAppForm.vue';
+
 export default {
   name: 'incomesForm',
-  extends: BaseAppForm,
+  extends: BaseAppFormVue,
   props: ["form", "title", "editMode"],
   methods: {
     onSubmit(){
       if (!this.internal_form.date) {
-        this.$qnotify({
+        this.$q.notify({
           color: 'red-4',
           textColor: 'white',
           icon: 'error',
@@ -31,7 +27,7 @@ export default {
     create () {
       this.internal_form.id = Date.now();
       this.$store.commit("incomes/ADD_INCOME", this.internal_form);
-      this.$qnotify({
+      this.$q.notify({
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',
@@ -41,7 +37,7 @@ export default {
     },
     update () {
       this.$store.commit("incomes/UPDATE_INCOME", this.internal_form);
-      this.$qnotify({
+      this.$q.notify({
           color: 'green-4',
           textColor: 'white',
           icon: 'cloud_done',

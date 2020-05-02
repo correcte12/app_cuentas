@@ -6,7 +6,7 @@
           <q-btn
             icon-right
             round
-            @click.native="addIncome"
+            @click="addIncome"
             color="primary"
             icon="add"
           />
@@ -74,13 +74,15 @@
 </template>
 
 <script>
-import localeMixin from "src/mixins/localeMixin";
+import localeMixin from '../../mixins/localeMixin';
+
 export default {
   name: 'IncomesPage',
   mixins: [localeMixin],
   mounted() {
-    this.loadData();
+    this.loadData();    
   },
+  
   data () {
     return {
       dates: [],
@@ -107,6 +109,10 @@ export default {
     }
   },
   methods: {
+    loadData () {
+      this.tableData = this.$store.getters[!incomes/forList];
+      this.dates= this.$store.getters["incomes/groupedByDate"];
+    },
     addIncome () {
       this.$router.push({ name: "IncomesCreate" });
     },
